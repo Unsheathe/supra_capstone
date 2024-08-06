@@ -1,24 +1,47 @@
-import logo from './logo.svg';
+// dependencies from sources
 import './App.css';
+import React, { useEffect, useState} from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {PrimeReactProvider} from 'primereact/api'
+import Cookies from 'js-cookie'
+import "primeflex/primeflex.css";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+// dependencies that I made
+import Homepage from './homepage.js'
+import StoreDetail from './storedetail.js'
+import Login from './login.js'
+
+export const AuthContext = React.createContext()
 
 function App() {
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(0)
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = Cookies.get('auth_token');
+    if (token) {
+      setAuth(true);
+    }
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthContext.Provider value={{auth, setAuth}}>
+        <PrimeReactProvider>
+          <Routes>
+            <Route path='/' element={<Homepage/>} />
+            <Route path='/:un_id' element={<StoreDetail/>} />
+            <Route path='/login' element={<Login />}/>
+          </Routes>
+        </PrimeReactProvider>
+      </AuthContext.Provider>
+    </Router>
   );
 }
 

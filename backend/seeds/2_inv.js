@@ -1,11 +1,17 @@
-import faker from 'faker'
+const {faker} = require ('@faker-js/faker')
 
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> } 
  */
-const template = () => {return {un_id: num(6), item_name: faker.commerce.product(), desc: faker.commerce.produceDescription(), quan: num(10), img: faker.image.urlPicsumPhotos(), price: num(100)}}
-const num = (max) =>{return Math.floor(Math.random*max)+1}
+const template = () => {return {
+  un_id: num(6), 
+  item_name: faker.commerce.product(), 
+  desc: faker.commerce.productDescription(), 
+  quan: num(10), 
+  img: faker.image.urlPicsumPhotos(), 
+  price: num(100)}}
+const num = (max) =>{return Math.floor(Math.random()*max)+1}
 
 exports.seed = async function(knex) {
   // Deletes ALL existing entries

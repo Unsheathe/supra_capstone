@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {Header, LoginButton} from './header'
 
 const Home = () => {
 
@@ -7,8 +8,10 @@ const Home = () => {
   })
 
   return (<>
-    {/* <Header />
-    <Stores />
+    <Header />
+    <LoginButton />
+    
+    {/* <Stores />
     {un_id == 1 ? <EditUsers /> : <></>} */}
   </>)
 }

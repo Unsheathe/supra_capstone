@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 //import './login.css';
 import { AuthContext } from './App';
-import Header from './header.js'
+import {Header} from './header.js'
 
 const Login = () => {
   const [username, setUsername] = useState('');

@@ -1,0 +1,72 @@
+/* General Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Header Styles */
+h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Input Text Styles */
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder {
+  color: #aaa;
+}
+
+/* Checkbox Styles */
+.rememberMe {
+  margin-right: 10px;
+}
+
+/* Button Styles */
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #007BFF;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Message Button Styles */
+button[visible="true"] {
+  background-color: #ffc107;
+  color: #000;
+}
+
+button[visible="true"]:hover {
+  background-color: #e0a800;
+}
+
+/* Margin and Padding */
+br {
+  margin-bottom: 10px;
+}

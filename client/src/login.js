@@ -5,7 +5,7 @@ import { InputText } from 'primereact/inputtext';
 //import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import Cookies from 'js-cookie';
-//import './login.css';
+import './login.css';
 import { AuthContext } from './App';
 import {Header} from './header.js'
 
@@ -59,6 +59,7 @@ const Login = () => {
         Cookies.remove('username');
         Cookies.set('rememberMe', 'false');
       }
+      console.log(status)
       handleResponse(status);
     } else {
       let msg = '';
@@ -76,7 +77,7 @@ const Login = () => {
     if (res.token) {
       Cookies.set('auth_token', res.token);
       setAuth(true);
-      navigate(`/${res.userId}`)
+      navigate(`/${res.id}`)
     } else {
       alert(res.message)
     }

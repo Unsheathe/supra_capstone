@@ -15,7 +15,8 @@ const createUserTemplate = async () => {
     un: faker.internet.userName(),
     pw_hash: hashedPassword,
     store_name: faker.company.name(),
-    logo: faker.image.urlPicsumPhotos()
+    logo: faker.image.urlPicsumPhotos(),
+    auth_token: ''
   };
 };
 
@@ -25,8 +26,8 @@ exports.seed = async function(knex) {
   const peterpw = await hashme('great')
   const defaultUser = await createUserTemplate();
   await knex('users').insert([
-    {un: 'admin', pw_hash: adminpw, store_name: null, logo: null},
+    {un: 'admin', pw_hash: adminpw, store_name: null, logo: null, auth_token: ''},
     defaultUser,
-    {un: 'petersen', pw_hash: peterpw, store_name: 'bathhouse', logo: faker.image.urlPicsumPhotos()}
+    {un: 'petersen', pw_hash: peterpw, store_name: 'bathhouse', logo: faker.image.urlPicsumPhotos(), auth_token: ''}
   ]);
 }

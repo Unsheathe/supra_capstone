@@ -3,10 +3,11 @@ import {Header, LoginButton} from './header'
 
 const StoreDetail = () => {
   const [viewer, setViewer] = useState(0)
+  const [inv, setInv] = useState([])
 
   useEffect(() => {
-    //if they are logged in as THAT store owner, show additional buttons to make or delete from inventory
-  })
+    fetch('localhost:8080/viewer').then(res => res.json()).then(data => setInv(data))
+  }, [])
 
   return (<>
     <Header />

@@ -9,6 +9,7 @@ exports.up = function(knex) {
     table.string('pw_hash')
     table.string('store_name')
     table.string('logo')
+    table.string('auth_token')
   })
 };
 

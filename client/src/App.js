@@ -11,6 +11,7 @@ import Homepage from './homepage.js'
 import StoreDetail from './storedetail.js'
 import Login from './login.js'
 import AllItems from './allitems.js'
+import PageNotFound from './pagenotfound.js'
 
 export const AuthContext = React.createContext()
 
@@ -36,10 +37,11 @@ function App() {
       <AuthContext.Provider value={{auth, setAuth}}>
         <PrimeReactProvider>
           <Routes>
-            <Route path='/' element={<Homepage/>} />
+            <Route exact path='/' element={<Homepage/>} />
             <Route path='/:un_id' element={<StoreDetail/>} />
             <Route path='/login' element={<Login />}/>
             <Route path='/all' element={<AllItems />}/>
+            <Route element={<PageNotFound/>}/>
           </Routes>
         </PrimeReactProvider>
       </AuthContext.Provider>

@@ -6,7 +6,9 @@ const StoreDetail = () => {
   const [inv, setInv] = useState([])
 
   useEffect(() => {
-    fetch('localhost:8080/viewer').then(res => res.json()).then(data => setInv(data))
+    fetch('http://localhost:8080/viewer', {
+      method: 'GET', credentials: 'include'
+    }).then(res => res.json()).then(data => setInv(data))
   }, [])
 
   return (<>

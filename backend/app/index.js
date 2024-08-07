@@ -5,9 +5,11 @@ const port = 8080
 const knex = require('knex')(require('../knexfile.js')['development']);
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const bodyParser = require('body-parser')
 const SECRET_KEY = 'string' //process.env.SECRET_KEY
 
 app.use(express.json())
+app.use(bodyParser.json())
 app.use(cores())
 
 app.get('/', (req, res) => {
@@ -19,7 +21,10 @@ app.get('/all', (req, res) => {
 })
 
 // app.get('/viewer', async (req, res) => {
-//   const token = req.cookies.token
+//   //console.log(req)
+//   //console.log(req.cookies)
+//   //const token = req.cookies.auth_token;
+//   console.log(token)
 //   await knex('users').select('id').where('auth_token', token).then(data => res.status(data))
 // })
 
@@ -33,7 +38,7 @@ app.post("/login", async (req, res) => {
           const token = jwt.sign({ un: user }, SECRET_KEY, { expiresIn: '1d' });
           await knex('users').update({auth_token: token}).where("un", user);
           res.cookie('auth_token', token, { httpOnly: true, secure: false });
-          res.status(200).json({ message: "Logging you in", token });
+          res.status(200).json({ message: "Logging you in", token, id: query[0].id});
         } else {
           res.status(404).json({ message: "Incorrect username or password" });
         }

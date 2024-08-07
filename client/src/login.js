@@ -35,7 +35,6 @@ const Login = () => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         return res;
       })
       .catch(error => {
@@ -59,7 +58,6 @@ const Login = () => {
         Cookies.remove('username');
         Cookies.set('rememberMe', 'false');
       }
-      console.log(status)
       handleResponse(status);
     } else {
       let msg = '';
@@ -76,6 +74,7 @@ const Login = () => {
   const handleResponse = (res) => {
     if (res.token) {
       Cookies.set('auth_token', res.token);
+      Cookies.set('un_id', res.id)
       setAuth(true);
       navigate(`/${res.id}`)
     } else {

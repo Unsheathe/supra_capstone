@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {Header, LoginButton, Viewer} from './header'
+import './allitems.css'
 
 const AllItems = () => {
   const [inv, setInv] = useState([])
 
   useEffect(() => {
-    fetch('localhost:8080/all').then(res => res.json()).then(data => setInv(data)).catch(err => console.log(err))
+    fetch('http://localhost:8080/all').then(res => res.json()).then(data => setInv(data)).catch(err => console.log(err))
   }, [])
 
   return (<>

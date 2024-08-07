@@ -37,7 +37,7 @@ function App() {
       <AuthContext.Provider value={{auth, setAuth}}>
         <PrimeReactProvider>
           <Routes>
-            <Route exact path='/' element={<Homepage/>} />
+            <Route exact path='/1' element={<Homepage/>} />
             <Route path='/:un_id' element={<StoreDetail/>} />
             <Route path='/login' element={<Login />}/>
             <Route path='/all' element={<AllItems />}/>

@@ -20,14 +20,6 @@ app.get('/all', (req, res) => {
   knex('inv').select().then((data) => res.send(data)).catch((err) => res.send(err))
 })
 
-// app.get('/viewer', async (req, res) => {
-//   //console.log(req)
-//   //console.log(req.cookies)
-//   //const token = req.cookies.auth_token;
-//   console.log(token)
-//   await knex('users').select('id').where('auth_token', token).then(data => res.status(data))
-// })
-
 app.post("/login", async (req, res) => {
   try{
       const { user, pass, type } = req.body;
@@ -56,10 +48,10 @@ app.post("/login", async (req, res) => {
     }
 });
 
-// app.get('/:un_id', (req, res) => {
-//     knex('users').select().then((data) => res.send(data))
-//         .catch((err) => res.send(err))
-// })
+app.get('/:un_id', (req, res) => {
+    knex('inv').select().where("un_id", un_id).then((data) => res.send(data))
+        .catch((err) => res.send(err))
+})
 
 app.get('/inv', (req, res) => {
   knex('inv').select().then((data) => res.send(data))

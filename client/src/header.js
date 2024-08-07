@@ -21,3 +21,12 @@ export function LoginButton() {
     <Button label="Login" onClick={handleLoginClick}></Button>
   </>);
 }
+
+export function Viewer() {
+  //find out who is logged in
+  const viewer = ''
+  //say who is logged in
+  return(<>
+    {viewer ? <p>You are logged in as</p> : <></>}
+  </>)
+}

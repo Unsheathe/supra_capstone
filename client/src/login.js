@@ -1,11 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InputText } from 'primereact/inputtext';
-import { FloatLabel } from "primereact/floatlabel";
-import { Dialog } from 'primereact/dialog';
+//import { FloatLabel } from "primereact/floatlabel";
+//import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import Cookies from 'js-cookie';
-
 //import './login.css';
 import { AuthContext } from './App';
 import {Header} from './header.js'
@@ -15,11 +14,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
+  const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
   const { setAuth } = useContext(AuthContext);
-  const [checked, setChecked] = useState(false);
 
-  const loginServer = 'http://localhost:8080/verify';
+  const loginServer = 'http://localhost:8080/login';
 
   async function authenticate(username, password, requestType) {
     const response = await fetch(loginServer, {
@@ -77,7 +76,7 @@ const Login = () => {
     if (res.token) {
       Cookies.set('auth_token', res.token);
       setAuth(true);
-      navigate('/home');
+      navigate(`/${res.userId}`)
     } else {
       alert(res.message)
     }

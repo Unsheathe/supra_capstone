@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Header, LoginButton} from './header'
+import {Header, LoginButton, Viewer} from './header'
 
 
 
@@ -11,6 +11,7 @@ const Home = () => {
 
   return (<>
     <Header />
+    <Viewer />
     <LoginButton />
     
     {/* <Stores />

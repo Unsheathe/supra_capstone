@@ -1,10 +1,47 @@
-import React, {useEffect, useState} from 'react'
-import {Header, LoginButton, Viewer} from './header'
-import "./homepage.css"
+import React, { useEffect, useState } from 'react';
+import Header from './header';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import Cookies from 'js-cookie';
+import "./homepage.css";
+
+const rmuser = () => {};
+const mkuser = () => {};
+
+const Admin = () => {
+  return (
+    <>
+      <form>
+        <h1>Add Store</h1>
+        <InputText id='un' type='text' />
+        <br />
+        <InputText id='pw' type='password' />
+        <br />
+        <InputText id='store_name' type='text' />
+        <br />
+        <InputText id='logo' type='text' />
+        <br />
+        <Button label="Add Store" type="submit" onClick={(e) => mkuser(e)}></Button>
+      </form>
+      <form>
+        <h1>Remove Store</h1>
+        <InputText id='id' type='text' />
+        <Button label="Delete Store" type="submit" onClick={(e) => rmuser(e)}></Button>
+      </form>
+    </>
+  );
+};
 
 const Home = () => {
-  const [users, setUsers] = useState([])
-  const [error, setError] = useState(null);
+  const [viewer, setViewer] = useState(null);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const userid = Cookies.get('un_id');
+    if (userid) {
+      setViewer(parseInt(userid, 10)); 
+    }
+  }, []);
 
   useEffect(() => {
     fetch('http://localhost:8080/')
@@ -19,29 +56,24 @@ const Home = () => {
         const filteredUsers = data.filter(user => user.id !== 1);
         setUsers(filteredUsers);
       })
-      .catch((error) => {
-        setError(error.message);
-      });
+      .catch(err => console.error(err));
   }, []);
 
-  useEffect(() => {
-    //if they are logged in as admin, show additional buttons to make or delete accounts
-  })
+  return (
+    <>
+      <Header />
+      <div> 
+        {users.map((user) => (
+          <div className='storeIcon' key={user.id}>
+            <img alt={`${user.store_name}`} src={user.logo} />
+            <a href={`/${user.id}`}>{user.store_name}</a>
+            <br />
+          </div>
+        ))}
+      </div>
+      {viewer === 1 ? <Admin /> : null} {/* Show Admin component if viewer is admin (id 1) */}
+    </>
+  );
+};
 
-  return (<>
-    <Header />
-    <Viewer />
-    <LoginButton />
-    <div>
-      {users.map((user) => (
-        <div className = 'storeIcon' key={user.id}>
-          <img alt={`${user.store_name}`} src={user.logo} />
-          <a href={`/:user.id`}>{user.store_name}</a>
-          <br />
-        </div>
-      ))}
-    </div>
-  </>)
-}
-
-export default Home
+export default Home;

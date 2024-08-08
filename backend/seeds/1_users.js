@@ -28,6 +28,7 @@ exports.seed = async function(knex) {
   await knex('users').insert([
     {un: 'admin', pw_hash: adminpw, store_name: null, logo: null, auth_token: ''},
     defaultUser,
-    {un: 'petersen', pw_hash: peterpw, store_name: 'bathhouse', logo: faker.image.urlPicsumPhotos(), auth_token: ''}
+    {un: 'petersen', pw_hash: peterpw, store_name: 'bathhouse', logo: faker.image.urlPicsumPhotos(), auth_token: ''},
+    defaultUser, defaultUser, defaultUser, defaultUser
   ]);
 }

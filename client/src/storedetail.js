@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
-import {Header, LoginButton, Viewer} from './header'
+import Header from './header'
 import {InputText } from 'primereact/inputtext';
 import {InputNumber} from 'primereact/inputnumber'
 import { Button} from 'primereact/button'
@@ -12,7 +12,6 @@ const mkitem = () => {}
 const Options = () => {
   return (<>
     <form>
-      <Header />
       <h1>Add stock</h1>
       <InputText id='item_name' type='text'/>
       <br />
@@ -27,7 +26,6 @@ const Options = () => {
       <Button label="Add Item" type="submit" onClick={(e)=>mkitem(e)}></Button>
     </form>
     <form>
-      <Header />
       <h1>Remove stock</h1>
       <InputText id='id' type='text'/>
       <Button label="Delete Item" type="submit" onClick={(e)=>rmitem(e)}></Button>
@@ -53,17 +51,15 @@ const StoreDetail = () => {
 
   return (<>
     <Header />
-    <Viewer />
-    <LoginButton />
     <div>
-      {inv.map((item) => (
+      {inv.map((e) => (
         <div className = 'item'>
-          <img alt={`${item.item_name}`} src={item.img} />
+          <img alt={`${e.item_name}`} src={e.img} />
+          <p>{e.item_name}</p>
           <br />
         </div>
       ))}
     </div>
-    {/* If owner of the page is viewing, display additional options */}
     {viewer === un_id ? <Options/> : null}
   </>)
 }

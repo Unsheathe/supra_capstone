@@ -5,7 +5,7 @@ const {faker} = require ('@faker-js/faker')
  * @returns { Promise<void> } 
  */
 const template = () => {return {
-  un_id: num(6), 
+  un_id: num(6)+1, 
   item_name: faker.commerce.product(), 
   desc: faker.commerce.productDescription(), 
   quan: num(10), 
@@ -17,7 +17,27 @@ exports.seed = async function(knex) {
   // Deletes ALL existing entries
   await knex('inv').del()
   await knex('inv').insert([
-    {un_id: 1, item_name: 'chocolate', desc: 'yum', quan: 0, img: null, price: 100},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
+    {...template()},
     {...template()},
     {...template()},
     {...template()},

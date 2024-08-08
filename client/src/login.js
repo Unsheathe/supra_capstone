@@ -1,13 +1,11 @@
-import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { InputText } from 'primereact/inputtext';
-//import { FloatLabel } from "primereact/floatlabel";
-//import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
-import Cookies from 'js-cookie';
+import {useState, useContext, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import {InputText} from 'primereact/inputtext'
+import {Button} from 'primereact/button'
+import Cookies from 'js-cookie'
 import './login.css';
-import { AuthContext } from './App';
-import {Header} from './header.js'
+import {AuthContext} from './App'
+import Header from './header.js'
 
 const Login = () => {
   const [username, setUsername] = useState('');

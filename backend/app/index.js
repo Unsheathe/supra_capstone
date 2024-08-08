@@ -49,8 +49,9 @@ app.post("/login", async (req, res) => {
 });
 
 app.get('/:un_id', (req, res) => {
-    knex('inv').select().where("un_id", un_id).then((data) => res.send(data))
-        .catch((err) => res.send(err))
+  const {un_id} = req.params
+  knex('inv').select().where("un_id", un_id).then((data) => res.send(data))
+    .catch((err) => res.send(err))
 })
 
 app.get('/inv', (req, res) => {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Header, LoginButton, Viewer} from './header'
+import Header from './header'
 import './allitems.css'
 
 const AllItems = () => {
@@ -11,13 +11,11 @@ const AllItems = () => {
 
   return (<>
     <Header />
-    <Viewer />
-    <LoginButton />
     <div>
       {inv.map((item) => (
         <div className = 'item'>
           <img alt={`${item.item_name}`} src={item.img} />
-          <a href={`/:un.id`}>{item.item_name}</a>
+          <a href={`/${item.un_id}`}>{item.item_name}</a>
           <br />
         </div>
       ))}

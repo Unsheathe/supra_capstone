@@ -41,7 +41,7 @@ function App() {
             <Route path='/:un_id' element={<StoreDetail/>} />
             <Route path='/login' element={<Login />}/>
             <Route path='/all' element={<AllItems />}/>
-            <Route element={<PageNotFound/>}/>
+            <Route path='*' element={<PageNotFound/>}/>
           </Routes>
         </PrimeReactProvider>
       </AuthContext.Provider>

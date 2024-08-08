@@ -7,11 +7,26 @@ import "./homepage.css";
 const server = 'http://localhost:8080/'
 
 //create a new business account
-const rmuser = () => {};
+const rmuser = async (e, store_name) => {
+  try{
+    const response = await fetch(server, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({store_name}),
+    })
+    const result = await response.json()
+    console.log('Response:', result);
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
 //delete a business account
 const mkuser = async (e, un, pw, store_name, logo) => {
-  //e.preventDefault()
   // check input lengths
   if (un.length > 255 || store_name.length > 255 || logo.length > 1000 ) {
     alert('Input exceeds maximum allowed length');
@@ -44,6 +59,9 @@ const Admin = () => {
   const [pw, setpw] = useState('')
   const [store_name, setstore_name] = useState('')
   const [logo, setlogo] = useState('')
+  //for removing
+  const [rmun, setrmun] = useState('')
+
   return (
     <>
       <form>
@@ -64,8 +82,9 @@ const Admin = () => {
       </form>
       <form>
         <h1>Remove Store</h1>
-        <InputText id='id' type='text' />
-        <Button label="Delete Store" type="submit" onClick={(e) => rmuser(e)}></Button>
+        Store name:
+        <InputText id='rmun' type='text' value = {rmun} onChange={(e) => setrmun(e.target.value)} required/>
+        <Button label="Delete Store" type="submit" onClick={(e) => rmuser(e, rmun)}></Button>
       </form>
     </>
   );

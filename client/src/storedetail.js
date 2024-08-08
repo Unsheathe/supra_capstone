@@ -10,7 +10,7 @@ const server = 'http://localhost:8080/'
 
 //delete an item
 const rmitem = (e, item_name) => {
-  e.preventDefault()
+  //e.preventDefault()
   const un_id = Cookies.get('un_id')
   fetch(`${server}${un_id}`, {
     method: 'DELETE',
@@ -90,6 +90,7 @@ const Options = () => {
     </form>
     <form>
       <h1>Remove stock</h1>
+      Item Name
       <InputText id='rmitem_name' type='text' value = {rmitem_name} onChange={(e) => setrmitem_name(e.target.value)} required/>
       <Button label="Delete Item" type="submit" onClick={(e)=>rmitem(e, rmitem_name)}></Button>
     </form>

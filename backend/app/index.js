@@ -12,15 +12,8 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(cores())
 
-//send all businesses (users table) data
-app.get('/', (req, res) => {
-  knex('users').select().then((data) => res.send(data)).catch((err) => res.send(err))
-})
 
-//create a new business
-app.post('/', (req, res) => {
-  const {un, pw, store_name, logo} =req.body
-})
+// // //    ANYONE REQUESTS
 
 //send all items regardless of distributer
 app.get('/all', (req, res) => {
@@ -56,12 +49,88 @@ app.post("/login", async (req, res) => {
     }
 });
 
+
+// // //   ADMIN REQUESTS
+
+//send all businesses (users table) data
+app.get('/', (req, res) => {
+  knex('users').select().then((data) => res.send(data)).catch((err) => res.status(500).send(err))
+})
+
+//create a new business
+app.post('/', async (req, res) => {
+  const {un, pw, store_name, logo} =req.body
+  const pw_hashed = await hashme(pw);
+  knex('users').insert({un, pw_hashed, store_name, logo, token: ''}).then(() => {
+    res.send(`Added ${store_name}`)
+  }).catch((err) => {
+    res.status(500).send(`Error: ${err}`)
+  })
+})
+
+//delete a business
+app.delete('/', async (req, res) => {
+  const {store_name} = req.body
+  try {
+    // remove all inventory associated with that business
+    await knex('inv')
+      .join('users', 'inv.un_id', '=', 'users.id')
+      .where('users.store_name', store_name)
+      .del();
+
+    // remove the business (user)
+    const deleted = await knex('users').where({ store_name }).del();
+    
+    if (deleted) {
+      res.send(`Removed ${store_name} and associated inventory.`);
+    } else {
+      res.status(404).send('Store not found.');
+    }
+  } catch (err) {
+    res.status(500).send('Request to delete failed.');
+    console.error(err);
+  }
+})
+
+//for hashing passwords
+const hashme = async (pass) => {
+  return await bcrypt.hash(pass, 10);
+};
+
+
+// // //   USER REQUESTS
+
 //send all items for a particular business
 app.get('/:un_id', (req, res) => {
   const {un_id} = req.params
   knex('inv').select().where("un_id", un_id).then((data) => res.send(data))
     .catch((err) => res.send(err))
 })
+
+//create a new item
+app.post('/:un_id', (req, res) => {
+  const {un_id, item_name, desc, quan, img, price} = req.body
+  knex('inv').insert({un_id, item_name, desc, quan, img, price}).then(() => {
+    res.send(`Added ${item_name}`)
+  }).catch((err) => {
+    res.status(500).send(`Error: ${err}`)
+  })
+})
+
+//delete an item
+app.delete('/:un_id', (req, res) => {
+  const {item_name} = req.body
+  knex('inv').where({item_name}).del().then((count)=>{
+    if (count) {
+      res.send(`Removed ${item_name}`)
+    } else {
+      res.status(404).send(`No ${item_name} to remove`)
+    }
+  }).catch((err) => {
+    res.status(500).send(`Error: ${err}`)
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)

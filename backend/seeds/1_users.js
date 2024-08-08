@@ -24,11 +24,15 @@ exports.seed = async function(knex) {
   await knex('users').del();
   const adminpw = await hashme('pword');
   const peterpw = await hashme('great')
-  const defaultUser = await createUserTemplate();
+  const defaultUser1 = await createUserTemplate();
+  const defaultUser2 = await createUserTemplate();
+  const defaultUser3 = await createUserTemplate();
+  const defaultUser4 = await createUserTemplate();
+  const defaultUser5 = await createUserTemplate();
   await knex('users').insert([
     {un: 'admin', pw_hash: adminpw, store_name: null, logo: null, auth_token: ''},
-    defaultUser,
-    {un: 'petersen', pw_hash: peterpw, store_name: 'bathhouse', logo: faker.image.urlPicsumPhotos(), auth_token: ''},
-    defaultUser, defaultUser, defaultUser, defaultUser
+    defaultUser1,
+    {un: 'bathowner', pw_hash: peterpw, store_name: 'bathhouse', logo: faker.image.urlPicsumPhotos(), auth_token: ''},
+    defaultUser2, defaultUser3, defaultUser4, defaultUser5
   ]);
 }

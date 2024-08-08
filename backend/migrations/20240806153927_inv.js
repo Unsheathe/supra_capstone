@@ -4,7 +4,9 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable('inv', (table) => {
-    table.integer('un_id') //this needs to grab from somewhere
+    table.increments()
+    table.integer('un_id')
+    table.foreign('un_id').references('id').inTable('users').onDelete('CASCADE')
     table.string('item_name')
     table.string('desc')
     table.integer('quan')

@@ -13,13 +13,17 @@ const AllItems = () => {
   return (<>
     <Header />
     <div>
-      {inv.map((item) => (
-        <div className = 'item'>
-          <img alt={`${item.item_name}`} src={item.img} />
-          <a href={`/${item.un_id}`}>{item.item_name}</a>
-          <br />
-        </div>
-      ))}
+      {Array.isArray(inv) && inv.length > 0 ? (
+        inv.map((item) => (
+          <div className='item' key={item.id}>
+            <img alt={`${item.item_name}`} src={item.img} />
+            <a href={`/${item.un_id}`}>{item.item_name}</a>
+            <br />
+          </div>
+        ))
+      ) : (
+        <p>No items found. Test your connection to the server.</p>
+      )}
     </div>
   </>)
 }

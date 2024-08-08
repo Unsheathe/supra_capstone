@@ -60,11 +60,11 @@ app.get('/', (req, res) => {
 //create a new business
 app.post('/', async (req, res) => {
   const {un, pw, store_name, logo} =req.body
-  const pw_hashed = await hashme(pw);
-  knex('users').insert({un, pw_hashed, store_name, logo, token: ''}).then(() => {
-    res.send(`Added ${store_name}`)
+  const pw_hash = await hashme(pw);
+  knex('users').insert({un, pw_hash, store_name, logo, auth_token: ''}).then(() => {
+    res.status(100)
   }).catch((err) => {
-    res.status(500).send(`Error: ${err}`)
+    res.status(500).send(err)
   })
 })
 

@@ -109,11 +109,12 @@ app.get('/:un_id', (req, res) => {
 
 //create a new item
 app.post('/:un_id', (req, res) => {
-  const {un_id, item_name, desc, quan, img, price} = req.body
+  const {un_id}=req.params
+  const {item_name, desc, quan, img, price} = req.body
   knex('inv').insert({un_id, item_name, desc, quan, img, price}).then(() => {
-    res.send(`Added ${item_name}`)
+    //res.send()
   }).catch((err) => {
-    res.status(500).send(`Error: ${err}`)
+    res.status(500).send(err)
   })
 })
 
@@ -122,7 +123,7 @@ app.delete('/:un_id', (req, res) => {
   const {item_name} = req.body
   knex('inv').where({item_name}).del().then((count)=>{
     if (count) {
-      res.send(`Removed ${item_name}`)
+      //res.send()
     } else {
       res.status(404).send(`No ${item_name} to remove`)
     }

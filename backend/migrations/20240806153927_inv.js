@@ -10,7 +10,7 @@ exports.up = function(knex) {
     table.string('item_name')
     table.string('desc')
     table.integer('quan')
-    table.string('img')
+    table.string('img', 1000)
     table.integer('price')
   })
 };

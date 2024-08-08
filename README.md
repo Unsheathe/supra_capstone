@@ -19,9 +19,6 @@ try out username: `bathowner` and password: `great` combo
 try out username: `admin` and password: `pword` combo
 - 
 
-### notes
-- adding stock will break if you use more than 255 chars in short things (like username, item name) and if you use more then 1000 chars in long things (like description, urls)
-
 ## ending it
 kill the containers and volumes
 `sudo docker-compose down -v`

@@ -1,26 +1,26 @@
 import React from 'react';
-import {useNavigate } from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {Button } from 'primereact/button'
 import Cookies from 'js-cookie'
 import './header.css'
 
+//main header function: logo + other elements
 export default function Header() {
   const navigate = useNavigate();
 
-  const handleClick = () => {navigate('/1');};
-
   return (<div className='header'>
-    <img alt='Home' src={require('./roll256.png')} onClick={handleClick} style={{ cursor: 'pointer' }} className='home-icon'/>
+    <img alt='Home' src={require('./roll256.png')} onClick={()=>navigate('/1')} style={{ cursor: 'pointer' }} className='home-icon'/>
     <Viewer />
     <LoginButton />
-  </div>);
+  </div>
+  );
 }
 
+//log in/out button
 function LoginButton() {
   const navigate = useNavigate();
   const user = Cookies.get('username')
 
-  const handleLoginClick = () => {navigate('/login')};
   const handleLogoutClick = () => {
     Cookies.remove('username')
     Cookies.remove('un_id')
@@ -29,17 +29,19 @@ function LoginButton() {
     window.location.reload()
   }
 
+  //change text and functionality depending on if logged in or out
   return (<>
+    <Button label="All items" onClick={()=>navigate('/all')}></Button>
     {user 
       ? (<Button label="Logout" onClick={handleLogoutClick} className="logout-button"></Button>
       ) : (
-        <Button label="Login" onClick={handleLoginClick} className="login-button"></Button>
-      )}
+        <Button label="Login" onClick={()=>navigate('/login')} className="login-button"></Button>
+    )}
   </>);
 }
 
+//find out who is logged in for custom message
 function Viewer() {
-  //find out who is logged in
   const user = Cookies.get('username')
   
   return(<>

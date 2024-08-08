@@ -12,14 +12,22 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(cores())
 
+//send all businesses (users table) data
 app.get('/', (req, res) => {
   knex('users').select().then((data) => res.send(data)).catch((err) => res.send(err))
 })
 
+//create a new business
+app.post('/', (req, res) => {
+  const {un, pw, store_name, logo} =req.body
+})
+
+//send all items regardless of distributer
 app.get('/all', (req, res) => {
   knex('inv').select().then((data) => res.send(data)).catch((err) => res.send(err))
 })
 
+//verify login credentials
 app.post("/login", async (req, res) => {
   try{
       const { user, pass, type } = req.body;
@@ -48,14 +56,10 @@ app.post("/login", async (req, res) => {
     }
 });
 
+//send all items for a particular business
 app.get('/:un_id', (req, res) => {
   const {un_id} = req.params
   knex('inv').select().where("un_id", un_id).then((data) => res.send(data))
-    .catch((err) => res.send(err))
-})
-
-app.get('/inv', (req, res) => {
-  knex('inv').select().then((data) => res.send(data))
     .catch((err) => res.send(err))
 })
 

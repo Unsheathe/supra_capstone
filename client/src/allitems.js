@@ -5,6 +5,7 @@ import './allitems.css'
 const AllItems = () => {
   const [inv, setInv] = useState([])
 
+  //get list of all items
   useEffect(() => {
     fetch('http://localhost:8080/all').then(res => res.json()).then(data => setInv(data)).catch(err => console.log(err))
   }, [])

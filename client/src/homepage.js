@@ -5,20 +5,27 @@ import { Button } from 'primereact/button';
 import Cookies from 'js-cookie';
 import "./homepage.css";
 
+//create a new business account
 const rmuser = () => {};
+//delete a business account
 const mkuser = () => {};
 
+//if admin is logged on, they can add/remove accounts
 const Admin = () => {
   return (
     <>
       <form>
-        <h1>Add Store</h1>
+        <h1>Add Store account</h1>
+        Username
         <InputText id='un' type='text' />
         <br />
+        Password
         <InputText id='pw' type='password' />
         <br />
+        Store Name
         <InputText id='store_name' type='text' />
         <br />
+        URL to logo
         <InputText id='logo' type='text' />
         <br />
         <Button label="Add Store" type="submit" onClick={(e) => mkuser(e)}></Button>
@@ -32,10 +39,12 @@ const Admin = () => {
   );
 };
 
+//main render function of homepage
 const Home = () => {
   const [viewer, setViewer] = useState(null);
   const [users, setUsers] = useState([]);
 
+  //find out who is logged in... is it admin?
   useEffect(() => {
     const userid = Cookies.get('un_id');
     if (userid) {
@@ -43,6 +52,7 @@ const Home = () => {
     }
   }, []);
 
+  //grab all current accounts
   useEffect(() => {
     fetch('http://localhost:8080/')
       .then((response) => {
@@ -52,13 +62,14 @@ const Home = () => {
         return response.json();
       })
       .then((data) => {
-        // Filter out the admin page
+        // ignoring admin user, create var of all account data
         const filteredUsers = data.filter(user => user.id !== 1);
         setUsers(filteredUsers);
       })
       .catch(err => console.error(err));
   }, []);
 
+  //render a page with links to every store
   return (
     <>
       <Header />

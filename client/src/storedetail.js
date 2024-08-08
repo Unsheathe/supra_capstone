@@ -6,22 +6,30 @@ import {InputNumber} from 'primereact/inputnumber'
 import { Button} from 'primereact/button'
 import Cookies from 'js-cookie'
 
+//create new item
 const rmitem = () => {}
+//remove an item
 const mkitem = () => {}
 
+// extra functions if owner is logged in
 const Options = () => {
   return (<>
     <form>
-      <h1>Add stock</h1>
+      <h1>Add stock</h1><br/>
+      Item name
       <InputText id='item_name' type='text'/>
       <br />
+      Description
       <InputText id='desc' type='text' />
       <br />
-      <InputNumber id='quan' type='text'/>
+      Quantity
+      <InputNumber id='quan' type='number'/>
       <br />
+      Link to product photo
       <InputText id='img' type='text' />
       <br />
-      <InputNumber id='price' type='text'/>
+      Price (Nearest dollar)
+      <InputNumber id='price' type='number'/>
       <br />
       <Button label="Add Item" type="submit" onClick={(e)=>mkitem(e)}></Button>
     </form>
@@ -33,6 +41,7 @@ const Options = () => {
   </>)
 }
 
+//see who is viewing... is it store owner?
 const StoreDetail = () => {
   const [viewer, setViewer] = useState(0)
   const [inv, setInv] = useState([])
@@ -45,6 +54,7 @@ const StoreDetail = () => {
     }
   }, [])
 
+  //get all inventory from a store
   useEffect(() => {
     fetch(`http://localhost:8080/${un_id}`).then(res => res.json()).then(data => setInv(data)).catch(err => console.log(err))
   }, [un_id])

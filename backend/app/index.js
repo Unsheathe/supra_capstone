@@ -15,6 +15,13 @@ app.use(cores())
 
 // // //    ANYONE REQUESTS
 
+//send a specific items details
+app.get('/i/:id', (req, res) => {
+  const {id} = req.params
+  knex('inv').select().where("id", id).then((data) => res.send(data))
+    .catch((err) => res.send(err))
+})
+
 //send all items regardless of distributer
 app.get('/all', (req, res) => {
   knex('inv').select().then((data) => res.send(data)).catch((err) => res.send(err))

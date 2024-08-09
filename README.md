@@ -8,6 +8,9 @@ do the same thing for frontend
 ## run it
 run a docker-compose of everything
 `cd ../ && sudo docker-compose up --build`
+
+at every build, the database is seeded with random information, except for two accounts `admin` and `bathowner` which are hardcoded so you can use the passwords for them to see what a user versus a priveledged user can do. Since the info is random except for what you put in while running the program, expect the data to not make sense (like an item "Car" with a photo of an apple, and description for a bike, or a business logo of a mountain, etc.)
+
 view client on :3000
 + check out what you can do as a guest!
 browse anything!

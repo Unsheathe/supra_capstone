@@ -97,12 +97,19 @@ const Options = () => {
   </>)
 }
 
-//see who is viewing... is it store owner?
 const StoreDetail = () => {
   const [viewer, setViewer] = useState(0)
   const [inv, setInv] = useState([])
+  const [focusItem, setFocusItem] = useState(null)
+  const [focus, setFocus] = useState(null)
   const {un_id}=useParams()
 
+  //get details of a single item
+  useEffect(()=>{
+    fetch(`${server}i/${focusItem}`).then(res => res.json()).then(data => setFocus(data[0])).catch(err => console.log(err))
+  }, [focusItem])
+
+  //is the page owner viewing?
   useEffect(() => {
     const userid = Cookies.get('un_id')
     if (userid){
@@ -120,8 +127,16 @@ const StoreDetail = () => {
     <div>
       {inv.map((e) => (
         <div className = 'item'>
-          <img alt={`${e.item_name}`} src={e.img} />
+          <img alt={`${e.item_name}`} src={e.img} onClick={()=>{setFocusItem(e.id)}}/>
           <p>{e.item_name}</p>
+
+          {focus && focus.id === e.id? <div className='specificItem'>
+            <h2>Product Details:</h2>
+            <p>Name: {focus.item_name}</p>
+            <p>Description: {focus.desc}</p>
+            <p>Current Stock: {focus.quan}</p>
+            <p>Price: {focus.price}</p>
+          </div> : null}
           <br />
         </div>
       ))}

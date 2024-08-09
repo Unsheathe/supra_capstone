@@ -132,10 +132,9 @@ const StoreDetail = () => {
 
           {focus && focus.id === e.id? <div className='specificItem'>
             <h2>Product Details:</h2>
-            <p>Name: {focus.item_name}</p>
             <p>Description: {focus.desc}</p>
             <p>Current Stock: {focus.quan}</p>
-            <p>Price: {focus.price}</p>
+            <p>Price: ${focus.price}</p>
           </div> : null}
           <br />
         </div>

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Header from './header';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import Cookies from 'js-cookie';
-import "./homepage.css";
+import React, { useEffect, useState } from 'react'
+import Header from './header'
+import { InputText } from 'primereact/inputtext'
+import { Button } from 'primereact/button'
+import Cookies from 'js-cookie'
+import {useNavigate} from 'react-router-dom'
+import "./homepage.css"
 const server = 'http://localhost:8080/'
 
 //create a new business account
@@ -94,6 +95,7 @@ const Admin = () => {
 const Home = () => {
   const [viewer, setViewer] = useState(null);
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate()
 
   //find out who is logged in... is it admin?
   useEffect(() => {
@@ -126,9 +128,9 @@ const Home = () => {
       <Header />
       <div> 
         {users.map((user) => (
-          <div className='storeIcon' key={user.id}>
+          <div className='storeIcon' key={user.id} onClick={()=>{navigate(`/${user.id}`)}}>
             <img alt={`${user.store_name}`} src={user.logo} />
-            <a href={`/${user.id}`}>{user.store_name}</a>
+            <p>{user.store_name}</p>
             <br />
           </div>
         ))}

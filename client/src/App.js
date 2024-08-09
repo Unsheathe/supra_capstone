@@ -17,7 +17,6 @@ export const AuthContext = React.createContext()
 
 function App() {
   const [auth, setAuth] = useState(false);
-  const [user, setUser] = useState(0)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

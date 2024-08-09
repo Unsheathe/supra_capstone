@@ -23,10 +23,9 @@ const AllItems = () => {
     <div>
       {Array.isArray(inv) && inv.length > 0 ? (
         inv.map((item) => (
-          <div className='item' key={item.id}>
-            <img alt={`${item.item_name}`} src={item.img} onClick={()=>{setFocusItem(item.id)}}/>
+          <div className='item' key={item.id} onClick={()=>{setFocusItem(item.id)}}>
+            <img alt={`${item.item_name}`} src={item.img} />
             <p>{item.item_name}</p>
-            <br />
 
             {focus && focus.id === item.id? <div className='specificItem'>
               <h2>Product Details:</h2>

@@ -126,8 +126,8 @@ const StoreDetail = () => {
     <Header />
     <div>
       {inv.map((e) => (
-        <div className = 'item'>
-          <img alt={`${e.item_name}`} src={e.img} onClick={()=>{setFocusItem(e.id)}}/>
+        <div className = 'item' onClick={()=>{setFocusItem(e.id)}}>
+          <img alt={`${e.item_name}`} src={e.img}/>
           <p>{e.item_name}</p>
 
           {focus && focus.id === e.id? <div className='specificItem'>
@@ -136,7 +136,6 @@ const StoreDetail = () => {
             <p>Current Stock: {focus.quan}</p>
             <p>Price: ${focus.price}</p>
           </div> : null}
-          <br />
         </div>
       ))}
     </div>

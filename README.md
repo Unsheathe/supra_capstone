@@ -43,7 +43,7 @@ kill the containers and volumes
 + the page will refresh, showing your items with the new item
 
 3. C. An item displays name, description, and quantity.
-- NOT DONE YET
+- click on the item to see full details
 
 4. A. As an inventory manager I want to be able to see a my entire inventory of items.
 + log in as manager and it takes you there
@@ -52,7 +52,7 @@ kill the containers and volumes
 + NOT DONE YET
 
 5. As an inventory manager I want to be able to see any individual item I have added. The full item information should be displayed.
-+ NOT DONE YET
++ click on the item to see full details
 
 
 6. A. As an inventory manager I want to be able to edit an item so that I can fix any mistakes I made creating it.
@@ -71,10 +71,10 @@ kill the containers and volumes
 + click on "All Items" while logged out
 
 9. A. As a visitor, who is not logged in, I want to be able to view a specific item created by any user so that I can see all of its details.
-+ NOT DONE YET
++ click on the item to see full details
 
 9. B. Unauthenticated users should be able to view all items, and any single item.
-+ NOT DONE YET
++ click on the item to see full details
 
 10. As an inventory manager I want to be able to view all items created by every inventory manager so that I can browse every item.
 + navigate to the home page (by clicking the logo icon in the header) and you can see all other inventories by store
